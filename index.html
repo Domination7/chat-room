@@ -5,9 +5,11 @@
 </head>
 
 <script src="/socket.io/socket.io.js"></script>
-<script> var socket = io(); </script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
+  var socket = io();
+  var largeSpace = '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0';
+
   $(function(){
     var socket = io();
     $('form').submit(function(){
@@ -16,7 +18,7 @@
       return false;
     });
     socket.on('chat message', function(msg){
-      $('#messages').append($('<li>').text(msg));
+      $('#messages').append($('<li>').text(msg + largeSpace + new Date($.now())));
     });
   });
 </script>
@@ -26,5 +28,5 @@
   <form action="Type Here">
     <input id="m" autocomplete="off" /><button>Send</button>
   </form>
-  
+
 </html>
